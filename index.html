@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Personal Information Builder</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #6c5ce7;
+            --secondary: #a29bfe;
+            --accent: #fd79a8;
+            --dark: #2d3436;
+            --light: #f5f6fa;
+            --gradient: linear-gradient(135deg, #6c5ce7 0%, #a29bfe 100%);
+            --glossy: linear-gradient(135deg, rgba(255,255,255,0.3) 0%, rgba(255,255,255,0) 50%);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: var(--light);
+            color: var(--dark);
+            overflow-x: hidden;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        /* Header */
+        header {
+            background: var(--gradient);
+            color: white;
+            padding: 30px 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--glossy);
+            z-index: 1;
+        }
+        
+        .header-content {
+            position: relative;
+            z-index: 2;
+        }
+        
+        h1 {
+            font-size: 3.5rem;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+        
+        .tagline {
+            font-size: 1.5rem;
+            margin-bottom: 30px;
+            font-weight: 300;
+        }
+        
+        .cta-button {
+            display: inline-block;
+            background: white;
+            color: var(--primary);
+            padding: 15px 40px;
+            border-radius: 50px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .cta-button:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+        
+        /* Features Section */
+        .features {
+            padding: 80px 0;
+            background: white;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+            font-size: 2.5rem;
+            color: var(--primary);
+            position: relative;
+        }
+        
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 100px;
+            height: 4px;
+            background: var(--accent);
+            margin: 15px auto;
+            border-radius: 2px;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .feature-card {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+            text-align: center;
+            border: 1px solid rgba(0,0,0,0.05);
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+        }
+        
+        .feature-icon {
+            font-size: 3rem;
+            color: var(--primary);
+            margin-bottom: 20px;
+        }
+        
+        .feature-title {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: var(--dark);
+        }
+        
+        .feature-desc {
+            color: #666;
+            line-height: 1.6;
+        }
+        
+        /* How It Works */
+        .how-it-works {
+            padding: 80px 0;
+            background: var(--light);
+        }
+        
+        .steps {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 50px;
+        }
+        
+        .step {
+            flex: 1;
+            min-width: 250px;
+            max-width: 300px;
+            text-align: center;
+            position: relative;
+        }
+        
+        .step-number {
+            width: 60px;
+            height: 60px;
+            background: var(--primary);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin: 0 auto 20px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .step-content {
+            background: white;
+            padding: 30px 20px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            position: relative;
+            z-index: 0;
+        }
+        
+        .step-title {
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            color: var(--dark);
+        }
+        
+        .step-desc {
+            color: #666;
+            line-height: 1.6;
+        }
+        
+        /* Benefits */
+        .benefits {
+            padding: 80px 0;
+            background: white;
+        }
+        
+        .benefits-list {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .benefit-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 30px;
+            background: rgba(108, 92, 231, 0.05);
+            padding: 20px;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+        }
+        
+        .benefit-item:hover {
+            transform: translateX(10px);
+            background: rgba(108, 92, 231, 0.1);
+        }
+        
+        .benefit-icon {
+            font-size: 1.5rem;
+            color: var(--primary);
+            margin-right: 20px;
+            margin-top: 5px;
+        }
+        
+        .benefit-content h3 {
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+            color: var(--dark);
+        }
+        
+        .benefit-content p {
+            color: #666;
+            line-height: 1.6;
+        }
+        
+        /* Footer */
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 50px 0 20px;
+            text-align: center;
+        }
+        
+        .footer-content {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .footer-logo {
+            font-size: 2rem;
+            font-weight: bold;
+            margin-bottom: 20px;
+            color: white;
+        }
+        
+        .copyright {
+            margin-top: 30px;
+            color: rgba(255,255,255,0.7);
+            font-size: 0.9rem;
+        }
+        
+        /* Floating Elements */
+        .floating {
+            position: absolute;
+            background: rgba(255,255,255,0.2);
+            border-radius: 50%;
+            filter: blur(30px);
+            z-index: 0;
+        }
+        
+        .floating-1 {
+            width: 200px;
+            height: 200px;
+            top: -50px;
+            left: -50px;
+            background: rgba(253, 121, 168, 0.3);
+        }
+        
+        .floating-2 {
+            width: 300px;
+            height: 300px;
+            bottom: -100px;
+            right: -100px;
+            background: rgba(162, 155, 254, 0.3);
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+            
+            .tagline {
+                font-size: 1.2rem;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="floating floating-1"></div>
+        <div class="floating floating-2"></div>
+        <div class="header-content">
+            <h1>Personal Information Builder</h1>
+            <p class="tagline">Create stunning professional resumes in minutes</p>
+            <button class="cta-button" onclick="window.location.href='info.html'">Start Building Now</button>
+        </div>
+    </header>
+    
+    <section class="features">
+        <div class="container">
+            <h2 class="section-title">Amazing Features</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-magic"></i>
+                    </div>
+                    <h3 class="feature-title">Easy to Use</h3>
+                    <p class="feature-desc">Our intuitive interface makes resume building a breeze, even for beginners.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-palette"></i>
+                    </div>
+                    <h3 class="feature-title">Beautiful Designs</h3>
+                    <p class="feature-desc">Choose from multiple professional templates that make your resume stand out.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-file-download"></i>
+                    </div>
+                    <h3 class="feature-title">Instant Download</h3>
+                    <p class="feature-desc">Get your resume in HTML format ready to use immediately after creation.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="how-it-works">
+        <div class="container">
+            <h2 class="section-title">How It Works</h2>
+            <div class="steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <h3 class="step-title">Fill Your Details</h3>
+                        <p class="step-desc">Enter your personal information, education, and work experience.</p>
+                    </div>
+                </div>
+                
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <h3 class="step-title">Customize Design</h3>
+                        <p class="step-desc">Select your preferred layout and color scheme for your resume.</p>
+                    </div>
+                </div>
+                
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <h3 class="step-title">Download & Share</h3>
+                        <p class="step-desc">Download your professional resume and start applying for jobs!</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="benefits">
+        <div class="container">
+            <h2 class="section-title">Why Choose Us</h2>
+            <div class="benefits-list">
+                <div class="benefit-item">
+                    <div class="benefit-icon">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <div class="benefit-content">
+                        <h3>Save Time</h3>
+                        <p>Create a professional resume in minutes instead of hours with our streamlined process.</p>
+                    </div>
+                </div>
+                
+                <div class="benefit-item">
+                    <div class="benefit-icon">
+                        <i class="fas fa-check-circle"></i>
+                    </div>
+                    <div class="benefit-content">
+                        <h3>ATS Friendly</h3>
+                        <p>Our resumes are optimized to pass through Applicant Tracking Systems used by employers.</p>
+                    </div>
+                </div>
+                
+                <div class="benefit-item">
+                    <div class="benefit-icon">
+                        <i class="fas fa-lock"></i>
+                    </div>
+                    <div class="benefit-content">
+                        <h3>Privacy Focused</h3>
+                        <p>Your data stays on your device - we don't store your personal information on our servers.</p>
+                    </div>
+                </div>
+                
+                <div class="benefit-item">
+                    <div class="benefit-icon">
+                        <i class="fas fa-mobile-alt"></i>
+                    </div>
+                    <div class="benefit-content">
+                        <h3>Mobile Friendly</h3>
+                        <p>Works perfectly on all devices - desktop, tablet, and mobile phones.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">Personal Information Builder</div>
+                <button class="cta-button" onclick="window.location.href='info.html'">Start Building Now</button>
+                <p class="copyright">© 2025 Personal Information Builder. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
